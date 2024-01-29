@@ -5,22 +5,19 @@ import jm.task.core.jdbc.model.User;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import static jm.task.core.jdbc.util.Util.getConnection;
 
 public class UserDaoJDBCImpl implements UserDao {
     private final Connection connection = getConnection();
-    private static final Logger log = Logger.getLogger(UserDaoJDBCImpl.class.getName());
-    public UserDaoJDBCImpl() {
 
+    public UserDaoJDBCImpl() {
     }
 
     public void createUsersTable() {
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS users (Id BIGINT PRIMARY KEY AUTO_INCREMENT, " +
                     "name VARCHAR(50), lastName VARCHAR(50), age TINYINT)");
-            log.info("UsersTable создана");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
